@@ -16,7 +16,7 @@ wheels = [
 ]
 
 [[package]]
-name = "algokit-subscriber"
+name = "algokit-subscriber-luca-py"
 version = "1.0.1"
 source = { editable = "." }
 dependencies = [

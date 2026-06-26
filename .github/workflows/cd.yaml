@@ -34,6 +34,9 @@ jobs:
     uses: ./.github/workflows/build-python.yaml
     needs: [ci-check-python, ci-check-docs]
 
+  # NOTE: sandbox version of upstream cd.yaml:
+  #   * uses a personal GitHub App (BOT_ID/BOT_SK) to mirror upstream's release identity
+  #   * PyPI -> Test PyPI via OIDC trusted publishing
   release:
     name: Release Library
     needs: ci-build-python
@@ -68,7 +71,7 @@ jobs:
         id: get_branch
 
       - name: Set Git user as GitHub actions
-        run: git config --global user.email "179917785+engineering-ci[bot]@users.noreply.github.com" && git config --global user.name "engineering-ci[bot]"
+        run: git config --global user.email "github-actions[bot]@users.noreply.github.com" && git config --global user.name "github-actions[bot]"
 
       - name: Create Continuous Deployment - Beta (non-prod)
         id: release-beta
@@ -88,12 +91,13 @@ jobs:
           uv run semantic-release -v version
           uv run semantic-release publish
 
-      - name: Publish package distributions to PyPI
+      - name: Publish package distributions to Test PyPI
         if: |
           (steps.release-beta.outputs.released == 'true') ||
           (steps.release-prod.outputs.released == 'true')
         uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.14.0
         with:
+          repository-url: https://test.pypi.org/legacy/
           verbose: true
 
   deploy-docs:

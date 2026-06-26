@@ -1,5 +1,5 @@
 [project]
-name = "algokit-subscriber"
+name = "algokit-subscriber-luca-py"
 version = "1.0.1"
 description = ""
 authors = [{ name = "Algorand Foundation" }]
@@ -31,6 +31,11 @@ dev = [
 [build-system]
 requires = ["uv_build>=0.9.5,<0.12"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+# Distribution renamed to algokit-subscriber-luca-py for the Test PyPI sandbox;
+# keep the importable module as the original algokit_subscriber.
+module-name = "algokit_subscriber"
 
 [tool.ruff]
 line-length = 120
