@@ -5,8 +5,8 @@ import remarkGithubAlerts from "remark-github-alerts";
 import sidebar from "./sidebar.config.json";
 
 export default defineConfig({
-  site: "https://algorandfoundation.github.io",
-  base: "/algokit-subscriber-py/",
+  site: "https://mrcointreau.github.io",
+  base: "/algokit-subscriber-luca-py/",
   trailingSlash: "always",
   markdown: {
     remarkPlugins: [remarkGithubAlerts],
